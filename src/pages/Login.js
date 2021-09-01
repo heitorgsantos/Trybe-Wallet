@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setUserValue } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -6,12 +8,13 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      emailvalidate: '',
-      passwordValidate: '',
+      emailvalidate: false,
+      passwordValidate: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
+    // this.validatePassword = this.validatePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target: { value, name } }) {
@@ -37,10 +40,16 @@ class Login extends React.Component {
     return (value.length >= caracters);
   }
 
+  handleSubmit() {
+    const { history, add } = this.props;
+    add(this.state);
+    history.push('/carteira');
+  }
+
   render() {
-    const { email, password, emailvalidate, passwordValidate } = this.state;
+    const { emailvalidate, passwordValidate } = this.state;
     return (
-      <form>
+      <form onSubmit={ this.handleSubmit }>
         <label htmlFor="email-input">
           Email
           <input
@@ -49,7 +58,7 @@ class Login extends React.Component {
             data-testid="email-input"
             name="email"
             onChange={ this.handleChange }
-            value={ email }
+            // value={ email }
           />
         </label>
 
@@ -60,11 +69,11 @@ class Login extends React.Component {
             id="password-input"
             data-testid="password-input"
             onChange={ this.handleChange }
-            value={ password }
+            name="password"
           />
         </label>
         <button
-          type="button"
+          type="submit"
           disabled={ !(emailvalidate && passwordValidate) }
         >
           Entrar
@@ -73,5 +82,8 @@ class Login extends React.Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  add: (payload) => dispatch(setUserValue(payload)),
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

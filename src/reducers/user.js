@@ -1,14 +1,19 @@
+import { SET_USER } from '../actions';
+
 const INITIAL_STATE = {
   email: '',
+  password: '',
+  emailvalidate: false,
+  passwordValidate: false,
 };
 
-function user(state = INITIAL_STATE, action) {
+function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case 'LOGIN':
-    return { email: action.state };
+  case SET_USER:
+    return { ...state, ...action.payload };
   default:
     return state;
   }
 }
 
-export default user;
+export default reducer;

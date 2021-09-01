@@ -1,3 +1,3 @@
-const newAction = (state) => ({ type: 'NEW_ACTION', state });
+export const SET_USER = 'SET_USER';
 
-export default newAction;
+export const setUserValue = (payload) => ({ type: SET_USER, payload });
