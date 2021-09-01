@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setUserValue } from '../actions';
@@ -82,6 +83,14 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  add: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
 const mapDispatchToProps = (dispatch) => ({
   add: (payload) => dispatch(setUserValue(payload)),
 });
