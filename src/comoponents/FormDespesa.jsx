@@ -1,12 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setDespesas } from '../actions';
+import coinsApi from '../requisições/coinsApi';
 
 class FormDespesa extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      moedas: [],
+    };
+  }
+
+  componentDidMount() {
+    coinsApi()
+      .then((answer) => this.setState({ moedas: answer }));
+    // console.log(coins);
+  }
+
   render() {
+    const { moedas } = this.state;
+    const { expenses } = this.props;
     return (
       <form>
         <label htmlFor="valor">
           Valor
-          <input id="valor" value="valor" name="valor" type="text" />
+          <input id="valor" name="valor" type="text" />
         </label>
         <label htmlFor="descricao">
           Descrição
@@ -15,12 +33,18 @@ class FormDespesa extends React.Component {
         <label htmlFor="moeda">
           Moeda
           <select id="moeda">
-            options
+            {/* { console.log(moedas)} */}
+            {moedas.map((moeda) => <option key={ moeda }>{moeda}</option>)}
           </select>
         </label>
+        <button type="button" onClick={ () => expenses('teste') }>Adicionar despesa</button>
       </form>
     );
   }
 }
 
-export default FormDespesa;
+const mapDispatchToProps = (dispatch) => ({
+  expenses: (payload) => dispatch(setDespesas(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(FormDespesa);

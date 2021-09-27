@@ -3,8 +3,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FormDespesa from '../comoponents/FormDespesa';
 import Pagamento from '../comoponents/Pagamento';
+// import coinsApi from '../requisições/coinsApi';
 
 class Wallet extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      // coins: [],
+    };
+  }
+
+  // componentDidMount() {
+  //   coinsApi();
+  // }
+
   render() {
     const { email } = this.props;
     return (
@@ -16,6 +28,7 @@ class Wallet extends React.Component {
         </header>
         <FormDespesa />
         <Pagamento />
+
       </div>
 
     );
