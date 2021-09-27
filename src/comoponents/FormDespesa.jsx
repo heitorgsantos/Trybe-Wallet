@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { setDespesas } from '../actions';
 import coinsApi from '../requisições/coinsApi';
 
@@ -37,7 +38,13 @@ class FormDespesa extends React.Component {
             {moedas.map((moeda) => <option key={ moeda }>{moeda}</option>)}
           </select>
         </label>
-        <button type="button" onClick={ () => expenses('teste') }>Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ () => expenses() }
+        >
+          Adicionar despesa
+
+        </button>
       </form>
     );
   }
@@ -46,5 +53,9 @@ class FormDespesa extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   expenses: (payload) => dispatch(setDespesas(payload)),
 });
+
+FormDespesa.propTypes = {
+  expenses: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(FormDespesa);
