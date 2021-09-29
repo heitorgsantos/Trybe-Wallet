@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setDespesas, getCurrencyThunk } from '../actions';
+import { getCurrencyThunk } from '../actions';
 import coinsApi from '../requisições/coinsApi';
 import Header from './Header';
 
@@ -92,12 +92,10 @@ const mapStateToProps = ({ wallet: { currencies, expenses } }) => ({
 });
 
 FormDespesa.propTypes = {
-  setExpenses: PropTypes.func.isRequired,
-  // expenses: PropTypes..isRequired,
-
-  // id: PropTypes.number.isRequired,
-  // getCurrReq: PropTypes.func.isRequired,
-  // currencies: PropTypes.objectOf(Object).isRequired,
+  expenses: PropTypes.shape({
+    length: PropTypes.func,
+  }).isRequired,
+  setExpenses: PropTypes.func.isRequired, // expenses: PropTypes..isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormDespesa);
