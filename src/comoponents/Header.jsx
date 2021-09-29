@@ -6,7 +6,7 @@ class Header extends Component {
     const { expenses } = this.props;
     return (
       <header>
-        <p data-testid="total-field">{console.log(expenses)}</p>
+        <p>{console.log(expenses)}</p>
       </header>
     );
   }

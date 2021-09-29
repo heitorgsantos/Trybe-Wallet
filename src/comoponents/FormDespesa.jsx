@@ -27,10 +27,10 @@ class FormDespesa extends React.Component {
   // }
 
   addExpenses() {
-    const { getCurrReq, expenses, id } = this.props;
-    getCurrReq();
-    expenses({
-      id,
+    const { setExpenses, expenses } = this.props;
+    // getCurrReq();
+    setExpenses({
+      id: expenses.length,
       value: document.getElementById('valor').value,
       description: document.getElementById('descricao').value,
       currency: document.getElementById('moeda').value,
@@ -81,20 +81,22 @@ class FormDespesa extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  expenses: (payload) => dispatch(setDespesas(payload)),
-  getCurrReq: () => dispatch(getCurrencyThunk()),
+  setExpenses: (payload) => dispatch(getCurrencyThunk(payload)),
+  // getCurrReq: () => dispatch(setDespesas()),
 
 });
 
-const mapStateToProps = ({ wallet: { id, currencies } }) => ({
-  id,
+const mapStateToProps = ({ wallet: { currencies, expenses } }) => ({
   currencies,
+  expenses,
 });
 
 FormDespesa.propTypes = {
-  expenses: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  getCurrReq: PropTypes.func.isRequired,
+  setExpenses: PropTypes.func.isRequired,
+  // expenses: PropTypes..isRequired,
+
+  // id: PropTypes.number.isRequired,
+  // getCurrReq: PropTypes.func.isRequired,
   // currencies: PropTypes.objectOf(Object).isRequired,
 };
 
