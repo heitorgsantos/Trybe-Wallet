@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrencyThunk } from '../actions';
 import coinsApi from '../requisições/coinsApi';
-import Header from './Header';
+// import Header from './Header';
 
 class FormDespesa extends React.Component {
   constructor() {
@@ -49,7 +49,7 @@ class FormDespesa extends React.Component {
     // console.log(id);
     return (
       <>
-        <Header />
+        {/* <Header /> */}
 
         <form>
           <label htmlFor="valor">
