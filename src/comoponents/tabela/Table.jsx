@@ -1,29 +1,40 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { setDeleteThunk } from '../../actions';
+import Table1 from './Table1';
 // import './table.css';
 
 class Table extends Component {
+  constructor() {
+    super();
+
+    // this.removeExpense = this.removeExpense.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  /* handleDelete({ target: { value, id } }) {
+    const line = document.getElementsByTagName('tread')[0];
+    const child = document.getElementsByTagName('tr');
+    if (line.parentNode) {
+      line.parentNode.removeChild(child[id]);
+    }
+
+    console.log(line);
+  } */
+
+  handleDelete(deleteTag) {
+
+  }
+
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
+
     return (
 
       <table>
-        <tread>
-          <tr>
-            <th className="description">Descrição</th>
-            <th className="description">Tag</th>
-            <th className="description">Método de pagamento</th>
-            <th className="description">Valor</th>
-            <th className="description">Moeda</th>
-            <th className="description">Câmbio utilizado</th>
-            <th className="description">Valor convertido</th>
-            <th className="description">Moeda de conversão</th>
-            <th className="description">Editar/Excluir</th>
-          </tr>
-        </tread>
-        <tread>
+        <Table1 />
+        <tread id="tread">
           {expenses.map(({
             id,
             description,
@@ -33,7 +44,7 @@ class Table extends Component {
             currency,
             exchangeRates,
           }) => (
-            <tr key={ id }>
+            <tr key={ id } id={ id }>
               <td>{description}</td>
               <td>{tag}</td>
               <td>{method}</td>
@@ -42,6 +53,17 @@ class Table extends Component {
               <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
               <td>{Number(exchangeRates[currency].ask * value).toFixed(2)}</td>
               <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  value={ id }
+                  data-testid="delete-btn"
+                  onClick={ this.handleDelete }
+                >
+                  Deletar
+                </button>
+
+              </td>
 
             </tr>
           ))}
@@ -58,8 +80,12 @@ Table.propTypes = {
   }).isRequired,
 };
 
+/* const mapDispatchtoProps = (dispatch) => ({
+  setExpenses: (payload) => dispatch(setDeleteThunk(payload)),
+}); */
+
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, null)(Table);
