@@ -9,26 +9,14 @@ class Table extends Component {
   constructor() {
     super();
 
-    // this.removeExpense = this.removeExpense.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleReal = this.handleReal.bind(this);
   }
 
-  /* handleDelete({ target: { value, id } }) {
-    const line = document.getElementsByTagName('tread')[0];
-    const child = document.getElementsByTagName('tr');
-    if (line.parentNode) {
-      line.parentNode.removeChild(child[id]);
-    }
-
-    console.log(line);
-  } */
-
   handleDelete(index1) {
-    const { expenses, setDelete } = this.props;
+    const { expenses, setRemove } = this.props;
     const removeExpense = expenses.filter((__, index2) => index1 === index2);
-    // console.log(...removeExpense);
-    setDelete(...removeExpense);
+    setRemove(...removeExpense);
   }
 
   handleReal(expenses) {
@@ -83,12 +71,12 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  expenses: PropTypes.shape({
-    map: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setRemove: PropTypes.func.isRequired,
 };
+
 const mapDispatchtoProps = (dispatch) => ({
-  setDelete: (payload) => dispatch(setDelete(payload)),
+  setRemove: (payload) => dispatch(setDelete(payload)),
 });
 
 const mapStateToProps = (state) => ({
