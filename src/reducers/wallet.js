@@ -4,7 +4,7 @@ const INITIAL_STATE = {
 };
 
 function wallet(state = INITIAL_STATE, action) {
-  console.log(state);
+  // console.log(state);
   switch (action.type) {
   case 'SET_DESPESA':
     return { ...state,
