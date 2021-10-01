@@ -6,6 +6,8 @@ export const GET_CURRENCY_SUCESS = 'GET_CURRENCY_SUCESS';
 
 export const SET_DELETE = 'SET-DELETE';
 
+export const setDelete = (payload) => ({ type: SET_DELETE, payload });
+
 export const setUserValue = (payload) => ({ type: SET_USER, payload });
 
 export const setDespesas = (payload) => ({ type: SET_DESPESA, payload });
